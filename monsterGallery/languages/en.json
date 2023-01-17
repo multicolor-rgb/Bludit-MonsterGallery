@@ -2,7 +2,6 @@
     "plugin-data":
     {
         "name": "MonsterGallery",
-        "description": "Gallery Plugin what you want use it!",
-        "description_ru": "Прекрасный плагин галереи, который вы захотите использовать и использовать!"
-    }
+        "description": "Gallery Plugin what you want use it!"
+     }
 }
