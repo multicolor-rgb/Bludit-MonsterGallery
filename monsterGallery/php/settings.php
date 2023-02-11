@@ -44,6 +44,10 @@ style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none;"
 style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none;background: red;"
 	>CLEAR THUMBNAILS CACHE</a>
 
+	<a href="<?php echo DOMAIN_ADMIN;?>plugin/monstergallery?&migrateGallery"
+style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none"
+	>MIGRATE</a>
+
 	<a href="<?php echo DOMAIN_ADMIN;?>plugin/monstergallery?&credits"
 style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none;"
 	>CREDITS</a>

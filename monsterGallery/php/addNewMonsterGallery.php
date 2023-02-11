@@ -191,7 +191,8 @@ foreach($fileditJson->images as $key=>$value){
 
 
 echo '<span class="monsterspan"> 
-<button class="closeThis">X</button>
+<button class="closeThis" onclick="event.preventDefault();
+this.parentElement.remove();">X</button>
 <img src="'.$value.'">
 <input type="text" name="name[]" value="'.@$fileditJson->names[$key].'" placeholder="title">
 <textarea  name="description[]" value="description" placeholder="description" style="width:100%;height:60px;box-sizing:border-box;padding:5px;">
@@ -237,16 +238,6 @@ window.open('<?php echo DOMAIN.HTML_PATH_ADMIN_ROOT;?>plugin/monstergallery?&fil
 });
 
 
-document.querySelectorAll('.closeThis').forEach((x,i)=>{
-
-x.addEventListener('click',(c)=>{
-	c.preventDefault();
-x.parentElement.remove();
-document.querySelector('.saveMG').style.display="block";
-});
-
-
-});
 
 
  

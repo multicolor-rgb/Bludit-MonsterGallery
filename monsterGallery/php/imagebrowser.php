@@ -48,7 +48,8 @@
 
      window.opener.document.querySelector('.imagelist').insertAdjacentHTML('afterbegin', `
 <span class="monsterspan"> 
-<button class="closeThis">X</button>
+<button class="closeThis" onclick="event.preventDefault();
+this.parentElement.remove();">X</button>
 <img src="${linkerNew}">
 <input type="text" name="name[]" placeholder="title">
 <textarea  name="description[]" value="description" placeholder="description" style="width:100%;height:60px;box-sizing:border-box;padding:5px;">
@@ -72,7 +73,8 @@
 
        window.opener.document.querySelector('.imagelist').insertAdjacentHTML('afterbegin', `
 <span class="monsterspan"> 
-<button class="closeThis">X</button>
+<button class="closeThis" onclick="event.preventDefault();
+this.parentElement.remove();">X</button>
 <img src="${linkerNew}">
 <input type="text" name="name[]" placeholder="title">
 <textarea  name="description[]" value="description" placeholder="description" style="width:100%;height:60px;box-sizing:border-box;padding:5px;">

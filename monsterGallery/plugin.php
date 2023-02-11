@@ -43,6 +43,14 @@ class monsterGallery extends Plugin
         };
 
 
+        if (isset($_GET['migrateGallery'])) {
+            // Token for send forms in Bludit
+
+            include($this->phpPath() . 'php/migrate.php');
+        };
+
+
+
         if (isset($_GET['addMonsterGallery'])) {
             // Token for send forms in Bludit
 
