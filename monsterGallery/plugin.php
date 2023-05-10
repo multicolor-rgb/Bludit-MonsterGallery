@@ -25,7 +25,16 @@ class monsterGallery extends Plugin
     public function adminView()
     {
 
+        $storeFolder = PATH_CONTENT . 'monsterGallery/';
+        $storeFolderImages = $storeFolder . 'monsterGalleryImages/';
+        $storeFolderThumb = $storeFolder . 'monsterGalleryThumb/';
+        $storeFolderList = $storeFolder . 'monsterGalleryList/';
 
+
+        $HTMLstoreFolder = HTML_PATH_CONTENT . 'monsterGallery/';
+        $HTMLstoreFolderImages = $HTMLstoreFolder . 'monsterGalleryImages/';
+        $HTMLstoreFolderThumb = $HTMLstoreFolder . 'monsterGalleryThumb/';
+        $HTMLstoreFolderList = $HTMLstoreFolder . 'monsterGalleryList/';
 
         global $security;
         $tokenCSRF = $security->getTokenCSRF();
@@ -41,6 +50,14 @@ class monsterGallery extends Plugin
 
             include($this->phpPath() . 'php/settings.php');
         };
+
+
+        if (isset($_GET['migrateGallery'])) {
+            // Token for send forms in Bludit
+
+            include($this->phpPath() . 'php/migrate.php');
+        };
+
 
 
         if (isset($_GET['addMonsterGallery'])) {
@@ -75,14 +92,25 @@ class monsterGallery extends Plugin
     public function siteHead()
     {
 
+
         function MGthumb($values, $width)
         {
 
 
+            $storeFolder = PATH_CONTENT . 'monsterGallery/';
+            $storeFolderImages = $storeFolder . 'monsterGalleryImages/';
+            $storeFolderThumb = $storeFolder . 'monsterGalleryThumb/';
+            $storeFolderList = $storeFolder . 'monsterGalleryList/';
+
+            $HTMLstoreFolder = HTML_PATH_CONTENT . 'monsterGallery/';
+            $HTMLstoreFolderImages = $HTMLstoreFolder . 'monsterGalleryImages/';
+            $HTMLstoreFolderThumb = $HTMLstoreFolder . 'monsterGalleryThumb/';
+            $HTMLstoreFolderList = $HTMLstoreFolder . 'monsterGalleryList/';
+
 
             $file = file_get_contents($values);
 
-            $folder = PATH_PLUGINS . "monsterGallery/monsterGalleryThumb/";
+            $folder = $storeFolderThumb;
 
 
             $extension =  pathinfo($values, PATHINFO_EXTENSION);
@@ -136,7 +164,7 @@ class monsterGallery extends Plugin
             };
 
 
-            return str_replace(PATH_PLUGINS, DOMAIN . '/bl-plugins/', $finalfile);
+            return str_replace($storeFolderThumb,  $HTMLstoreFolderThumb, $finalfile);
         };
 
 
@@ -144,11 +172,21 @@ class monsterGallery extends Plugin
         function mgShow($matches)
         {
 
-            if (file_exists(PATH_PLUGINS . 'monsterGallery/monsterGalleryList/' . $matches[1] . '.json')) {
+            $storeFolder = PATH_CONTENT . 'monsterGallery/';
+            $storeFolderImages = $storeFolder . 'monsterGalleryImages/';
+            $storeFolderThumb = $storeFolder . 'monsterGalleryThumb/';
+            $storeFolderList = $storeFolder . 'monsterGalleryList/';
+
+            $HTMLstoreFolder = HTML_PATH_CONTENT . 'monsterGallery/';
+            $HTMLstoreFolderImages = $HTMLstoreFolder . 'monsterGalleryImages/';
+            $HTMLstoreFolderThumb = $HTMLstoreFolder . 'monsterGalleryThumb/';
+            $HTMLstoreFolderList = $HTMLstoreFolder . 'monsterGalleryList/';
+
+            if (file_exists($storeFolderList . $matches[1] . '.json')) {
 
                 $modules = array();
                 $name = $matches[1];
-                $data = file_get_contents(PATH_PLUGINS . 'monsterGallery/monsterGalleryList/' . $name . '.json');
+                $data = file_get_contents($storeFolderList . $name . '.json');
                 $dataJson = json_decode($data, false);
                 $width = $dataJson->width;
                 $height = $dataJson->height;
@@ -197,120 +235,194 @@ class monsterGallery extends Plugin
     {
 
 
- 
-
-    
-            $ds   = DIRECTORY_SEPARATOR;
-
-            $storeFolder = PATH_PLUGINS . 'monsterGallery/monsterGalleryImages/';
-
-            if (!empty($_FILES)){
 
 
-        
-                $tempFile = $_FILES['file']['tmp_name'];
-                $targetPath =    $storeFolder;
 
-                $names = $_FILES['file']['name'];
-                $noSpaceName = str_replace(' ','-',pathinfo($_FILES['file']['name'])['filename']);
-                $newName = preg_replace('/[^0-9a-z\-]+/', '', $noSpaceName);
+        $ds   = DIRECTORY_SEPARATOR;
 
-                $targetFile =  $targetPath .$newName.'.'.pathinfo($_FILES['file']['name'])['extension'];
-                move_uploaded_file($tempFile, $targetFile);
-            };
-        
+
+        $storeFolder = PATH_CONTENT . 'monsterGallery/';
+        $storeFolderImages = $storeFolder . 'monsterGalleryImages/';
+        $storeFolderThumb = $storeFolder . 'monsterGalleryThumb/';
+        $storeFolderList = $storeFolder . 'monsterGalleryList/';
+
+
+        $HTMLstoreFolder = HTML_PATH_CONTENT . 'monsterGallery/';
+        $HTMLstoreFolderImages = $HTMLstoreFolder . 'monsterGalleryImages/';
+        $HTMLstoreFolderThumb = $HTMLstoreFolder . 'monsterGalleryThumb/';
+        $HTMLstoreFolderList = $HTMLstoreFolder . 'monsterGalleryList/';
+
+        if (file_exists($storeFolder) == null) {
+
+            mkdir($storeFolder, 0755);
+        };
+
+        if (file_exists($storeFolderImages) == null) {
+            mkdir($storeFolderImages, 0755);
+        };
+
+        if (file_exists($storeFolderThumb) == null) {
+            mkdir($storeFolderThumb, 0755);
+        };
+
+        if (file_exists($storeFolderList) == null) {
+            mkdir($storeFolderList, 0755);
+        };
+
+        file_put_contents($storeFolderImages . '.htaccess', 'Allow from all');
+        file_put_contents($storeFolderThumb . '.htaccess', 'Allow from all');
+        file_put_contents($storeFolderList . '.htaccess', 'Deny from all');
+
+
+        if (!empty($_FILES)) {
+
+            $tempFile = $_FILES['file']['tmp_name'];
+            $targetPath =  $storeFolderImages;
+
+            $names = $_FILES['file']['name'];
+            $noSpaceName = str_replace(' ', '-', pathinfo($_FILES['file']['name'])['filename']);
+            $newName = preg_replace('/[^0-9a-z\-]+/', '', $noSpaceName);
+
+            $targetFile =  $targetPath . $newName . '.' . pathinfo($_FILES['file']['name'])['extension'];
+            move_uploaded_file($tempFile, $targetFile);
+        };
+
 
 
 
         if (isset($_POST['saveMG'])) {
 
-            $file = $this->phpPath() . 'monsterGalleryList/' . str_replace(' ', '--', $_POST['MGtitle']) . '.json';
+            $file = $storeFolderList . str_replace(' ', '--', $_POST['MGtitle']) . '.json';
 
-            $folderExist = file_exists($this->phpPath() . 'monsterGalleryList/') || mkdir($this->phpPath() . 'monsterGalleryList/');
 
             $values = array();
             $descriptions = array();
             $texts = array();
 
-
-            if ($folderExist) {
-
-                foreach ($_POST['image'] as $key => $value) {
-                    array_push($values, $value);
-                };
+            foreach ($_POST['image'] as $key => $value) {
+                array_push($values, $value);
+            };
 
 
-                foreach ($_POST['name'] as $key => $value) {
-                    array_push($texts, $value);
-                };
+            foreach ($_POST['name'] as $key => $value) {
+                array_push($texts, $value);
+            };
 
 
 
-                foreach ($_POST['description'] as $key => $value) {
-                    array_push($descriptions, $value);
-                };
+            foreach ($_POST['description'] as $key => $value) {
+                array_push($descriptions, $value);
+            };
 
 
 
-                $myObj = new stdClass();
-                $myObj->names = $texts;
-                $myObj->images = $values;
-                $myObj->descriptions = $descriptions;
-                $myObj->width = @$_POST['width'];
-                $myObj->height = @$_POST['height'];
-                $myObj->gap = @$_POST['gap'];
-                $myObj->quality = @$_POST['quality'];
-                $myObj->modules = @$_POST['modules'];
+            $myObj = new stdClass();
+            $myObj->names = $texts;
+            $myObj->images = $values;
+            $myObj->descriptions = $descriptions;
+            $myObj->width = @$_POST['width'];
+            $myObj->height = @$_POST['height'];
+            $myObj->gap = @$_POST['gap'];
+            $myObj->quality = @$_POST['quality'];
+            $myObj->modules = @$_POST['modules'];
 
-                $myJSON = json_encode($myObj);
-
-
-
-                file_put_contents($file, $myJSON);
-
-
-                if (isset($_GET['edit']) && $_POST['MGtitle'] !== $_POST['check'] && $_POST['check'] !== null) {
-
-                    rename($this->phpPath() . 'monsterGalleryList/' . $_POST['check'] . '.json', $this->phpPath() . 'monsterGalleryList/' . $_POST['MGtitle'] . '.json');
-                }
+            $myJSON = json_encode($myObj);
 
 
 
-                echo "<script type='text/javascript'>
+            file_put_contents($file, $myJSON);
+
+
+            if (isset($_GET['edit']) && $_POST['MGtitle'] !== $_POST['check'] && $_POST['check'] !== null) {
+
+                rename($storeFolderList . $_POST['check'] . '.json', $storeFolderList . $_POST['MGtitle'] . '.json');
+            }
+
+
+            echo "<script type='text/javascript'>
     window.location.href = '" . HTML_PATH_ADMIN_ROOT . "plugin/monstergallery?&addMonsterGallery&edit=" . $_POST['MGtitle'] . "';
     </script>";
-            };
         };
 
 
 
         if (isset($_GET['clearCache'])) {
 
-            function mbCleanThumb()
-            {
 
-                $imager = glob(PATH_PLUGINS . 'monsterGallery/monsterGalleryThumb/*', GLOB_BRACE);
+            $imager = glob($storeFolderThumb . '*', GLOB_BRACE);
 
-                foreach ($imager as $img) {
-
-                    unlink($img);
-                };
+            foreach ($imager as $img) {
+                unlink($img);
             };
-
-            mbCleanThumb();
         };
 
 
 
         if (isset($_GET['delete'])) {
 
-            unlink($this->phpPath() . 'monsterGalleryList/' . $_GET['delete'] . '.json');
+            unlink($storeFolderList . $_GET['delete'] . '.json');
 
 
             global $SITEURL;
 
             echo "<script type='text/javascript'>
                 window.location.href = '" . HTML_PATH_ADMIN_ROOT . "plugin/monstergallery?monsterGalleryList=true';
+                </script>";
+        };
+
+
+        if (isset($_GET['moveData'])) {
+            foreach (glob($this->PhpPath() . 'monsterGalleryImages/*') as $file) {
+                $path = $this->PhpPath() . 'monsterGalleryImages/';
+                $pureFile = pathinfo($file)['basename'];
+                rename($path . $pureFile, $storeFolderImages . $pureFile);
+            };
+
+            unlink($this->PhpPath() . 'monsterGalleryImages/.htaccess');
+            rmdir($this->PhpPath() . 'monsterGalleryImages/');
+
+
+            foreach (glob($this->PhpPath() . 'monsterGalleryThumb/*') as $file) {
+                $path = $this->PhpPath() . 'monsterGalleryThumb/';
+                $pureFile = pathinfo($file)['basename'];
+                rename($path . $pureFile, $storeFolderThumb . $pureFile);
+            };
+
+            unlink($this->PhpPath() . 'monsterGalleryThumb/.htaccess');
+            rmdir($this->PhpPath() . 'monsterGalleryThumb/');
+
+            foreach (glob($this->PhpPath() . 'monsterGalleryList/*') as $file) {
+                $path = $this->PhpPath() . 'monsterGalleryList/';
+                $pureFile = pathinfo($file)['basename'];
+                rename($path . $pureFile, $storeFolderList . $pureFile);
+
+
+                foreach (glob($storeFolderList . '*.json') as $file) {
+
+                    $fileContent = file_get_contents($file);
+
+                    $newContent = str_replace('bl-plugins', 'bl-content', $fileContent);
+
+                    file_put_contents($file, $newContent);
+                }
+            };
+
+            unlink($this->PhpPath() . 'monsterGalleryList/.htaccess');
+            rmdir($this->PhpPath() . 'monsterGalleryList/');
+
+            echo '<div class="alert alert-success" role="alert">
+            Done!
+            </div>';
+
+
+            echo "<script type='text/javascript'>
+            
+            setTimeout(()=>{
+
+                window.location.href = '" . HTML_PATH_ADMIN_ROOT . "plugin/monstergallery?monsterGalleryList=true';
+
+            },2000);
+
                 </script>";
         };
     }

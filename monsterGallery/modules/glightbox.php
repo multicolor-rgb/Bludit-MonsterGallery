@@ -1,9 +1,9 @@
-<?php 
+<?php
 
- 
+
 
 $gal = '
-<link rel="stylesheet" href="'.DOMAIN.'/bl-plugins/monsterGallery/modules/glightbox/glightbox.min.css">
+<link rel="stylesheet" href="' . HTML_PATH_ROOT . '/bl-plugins/monsterGallery/modules/glightbox/glightbox.min.css">
 <style>
 
 .monsterGallery-grid{
@@ -11,7 +11,7 @@ $gal = '
 	flex-direction:row;
 	flex-wrap:wrap;'
 
-.($gap=='' ? '':'gap:'.$gap.'px').
+	. ($gap == '' ? '' : 'gap:' . $gap . 'px') .
 
 	'
 }
@@ -42,25 +42,19 @@ $gal .= '<div class="monsterGallery-grid">';
 
 foreach ($dataJson->images as $key => $value) {
 
- 
-$forthumb = str_replace(DOMAIN.'bl-plugins/monsterGallery/monsterGalleryImages/',PATH_PLUGINS.'/monsterGallery/monsterGalleryImages/',$value);
-$gal .=  '<a href="'.$value.'"  class="glightbox"    data-title="'.$dataJson->names[$key].'"
- data-description="'.$dataJson->descriptions[$key].'" data-zoomable="true"><img src="'.MGthumb($forthumb,$quality).'" style="width:'.$width.'px;height:'.$height.'px;object-fit:cover;"></a>';
 
+	$forthumb = str_replace(DOMAIN . $HTMLstoreFolderImages, $storeFolderImages, $value);
+	$gal .=  '<a href="' . $value . '"  class="glightbox"    data-title="' . $dataJson->names[$key] . '"
+ data-description="' . $dataJson->descriptions[$key] . '" data-zoomable="true"><img src="' . MGthumb($forthumb, $quality) . '" style="width:' . $width . 'px;height:' . $height . 'px;object-fit:cover;"></a>';
 }
 
- $gal .= '</div>';
+$gal .= '</div>';
 
 
 
- $gal .='<script src="'.DOMAIN.'/bl-plugins/monsterGallery/modules/glightbox/glightbox.min.js"></script>
- <script src="'.DOMAIN.'/bl-plugins/monsterGallery/modules/glightbox/glightboxrun.js"></script>';
+$gal .= '<script src="' . HTML_PATH_ROOT . '/bl-plugins/monsterGallery/modules/glightbox/glightbox.min.js"></script>
+ <script src="' . HTML_PATH_ROOT . '/bl-plugins/monsterGallery/modules/glightbox/glightboxrun.js"></script>';
 
 
 
-$modules = 'glightbox';
-
- 
-
-
- ;?>
+$modules = 'glightbox';;

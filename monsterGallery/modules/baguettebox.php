@@ -3,7 +3,7 @@
 global $SITEURL;
 
 $gal = '
-<link rel="stylesheet" href="'.DOMAIN.'/bl-plugins/monsterGallery/modules/baguettebox/baguetteBox.min.css">
+<link rel="stylesheet" href="'.HTML_PATH_ROOT.'/bl-plugins/monsterGallery/modules/baguettebox/baguetteBox.min.css">
 <style>
 
 .monsterGallery-grid{
@@ -44,7 +44,7 @@ foreach ($dataJson->images as $key => $value) {
 
 global $SITEURL;
 
-$forthumb = str_replace(DOMAIN.'bl-plugins/monsterGallery/monsterGalleryImages/',PATH_PLUGINS.'/monsterGallery/monsterGalleryImages/',$value);
+$forthumb = str_replace($HTMLstoreFolderImages,$HTMLstoreFolderImages,$value);
 
 $gal .=  '<a href="'.$value.'"      data-caption="<h4>'.$dataJson->names[$key].'</h4> '.$dataJson->descriptions[$key].'">
 <img alt="'.$dataJson->names[$key].' '.$dataJson->descriptions[$key].'" src="'.MGthumb($forthumb,$quality).'" style="width:'.$width.'px;height:'.$height.'px;object-fit:cover;"></a>';
@@ -54,7 +54,7 @@ $gal .=  '<a href="'.$value.'"      data-caption="<h4>'.$dataJson->names[$key].'
  $gal .= '</div>';
 
 
-$gal .= '<script async  src="'.DOMAIN.'/bl-plugins/monsterGallery/modules/baguettebox/baguetteBox.min.js"></script>';
+$gal .= '<script async  src="'.HTML_PATH_ROOT.'/bl-plugins/monsterGallery/modules/baguettebox/baguetteBox.min.js"></script>';
 
 $gal .= '<script>
  

@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 global $SITEURL;
 
 $gal = '
-<link rel="stylesheet" href="'.DOMAIN.'/bl-plugins/monsterGallery/modules/simplelightbox/simple-lightbox.min.css">
+<link rel="stylesheet" href="' . HTML_PATH_ROOT . 'bl-plugins/monsterGallery/modules/simplelightbox/simple-lightbox.min.css">
 
 <style>
 
@@ -12,7 +12,7 @@ $gal = '
 	flex-direction:row;
 	flex-wrap:wrap;'
 
-.($gap=='' ? '':'gap:'.$gap.'px').
+	. ($gap == '' ? '' : 'gap:' . $gap . 'px') .
 
 	'
 }
@@ -43,20 +43,19 @@ $gal .= '<div class="monsterGallery-grid gallery">';
 
 foreach ($dataJson->images as $key => $value) {
 
-global $SITEURL;
+	global $SITEURL;
 
-$forthumb = str_replace(DOMAIN.'bl-plugins/monsterGallery/monsterGalleryImages/',PATH_PLUGINS.'/monsterGallery/monsterGalleryImages/',$value);
+	$forthumb = str_replace($HTMLstoreFolderImages, $HTMLstoreFolderImages, $value);
 
-$gal .=  '<a href="'.$value.'"  data-title="'.$dataJson->names[$key].'"
- data-description="'.$dataJson->descriptions[$key].'" data-zoomable="true"><img src="'.MGthumb($forthumb,$quality).'" style="width:'.$width.'px;height:'.$height.'px;object-fit:cover;"></a>';
-
+	$gal .=  '<a href="' . $value . '"  data-title="' . $dataJson->names[$key] . '"
+ data-description="' . $dataJson->descriptions[$key] . '" data-zoomable="true"><img src="' . MGthumb($forthumb, $quality) . '" style="width:' . $width . 'px;height:' . $height . 'px;object-fit:cover;"></a>';
 }
 
- $gal .= '</div>';
+$gal .= '</div>';
 
 
- $gal .= '
-<script src="'.DOMAIN.'/bl-plugins/monsterGallery/modules/simplelightbox/simple-lightbox.min.js"></script>
+$gal .= '
+<script src="' . HTML_PATH_ROOT . 'bl-plugins/monsterGallery/modules/simplelightbox/simple-lightbox.min.js"></script>
 
 
  <script>
@@ -77,7 +76,4 @@ $gal .=  '<a href="'.$value.'"  data-title="'.$dataJson->names[$key].'"
 
 global $modules;
 
-$modules = 'simplelightbox';
-
-
- ;?>
+$modules = 'simplelightbox';;

@@ -4,7 +4,7 @@ global $SITEURL;
 
 $gal = '
 
-<link rel="stylesheet" href="'.DOMAIN.'/bl-plugins/monsterGallery/modules/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="'.HTML_PATH_ROOT.'/bl-plugins/monsterGallery/modules/photoswipe/photoswipe.css">
 
 <style>
 
@@ -46,7 +46,7 @@ foreach ($dataJson->images as $key => $value) {
 
 global $SITEURL;
 
-$forthumb = str_replace(DOMAIN.'bl-plugins/monsterGallery/monsterGalleryImages/',PATH_PLUGINS.'/monsterGallery/monsterGalleryImages/',$value);
+$forthumb = str_replace($HTMLstoreFolderImages,$HTMLstoreFolderImages,$value);
 $gal .=  '<a href="'.$value.'" class="pswp-gallery__item" >
 <img src="'.MGthumb($forthumb,$quality).'" style="width:'.$width.'px;height:'.$height.'px;object-fit:cover;"
 alt="'.$dataJson->names[$key].' '.$dataJson->descriptions[$key].'"
@@ -56,7 +56,7 @@ alt="'.$dataJson->names[$key].' '.$dataJson->descriptions[$key].'"
 
  $gal .= '</div>';
 
- $gal .= '<script type="module" src="'.DOMAIN.'/bl-plugins/monsterGallery/modules/photoswipe/photoSwipeModule.js"></script>';
+ $gal .= '<script type="module" src="'.HTML_PATH_ROOT.'/bl-plugins/monsterGallery/modules/photoswipe/photoSwipeModule.js"></script>';
 
 
 
@@ -65,4 +65,4 @@ global $modules;
 $modules = 'PhotoSwipe';
 
 
- ;?>
+ ;

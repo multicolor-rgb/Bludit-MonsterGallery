@@ -1,7 +1,4 @@
  <style>
-
-
-
    .sidebar {
      display: none !important;
    }
@@ -20,7 +17,7 @@
  <?php
 
   $count = 0;
-  foreach (glob($this->phpPath() . 'monsterGalleryImages/*') as $img) {
+  foreach (glob($storeFolderImages . '*') as $img) {
 
     $base = pathinfo($img)['basename'];
 
@@ -32,8 +29,8 @@
  <script>
    document.querySelectorAll('.photo').forEach(x => {
 
-     x.setAttribute('href', window.location.origin + '/bl-plugins/monsterGallery/monsterGalleryImages/' + x.getAttribute('href'))
-     x.querySelector('img').setAttribute('src', window.location.origin + '/bl-plugins/monsterGallery/monsterGalleryImages/' + x.querySelector('img').getAttribute('src'));
+     x.setAttribute('href', window.location.origin +  '<?php echo $HTMLstoreFolderImages ;?>' + x.getAttribute('href'))
+     x.querySelector('img').setAttribute('src', window.location.origin +  '<?php echo $HTMLstoreFolderImages ;?>' + x.querySelector('img').getAttribute('src'));
 
    })
 
@@ -48,7 +45,8 @@
 
      window.opener.document.querySelector('.imagelist').insertAdjacentHTML('afterbegin', `
 <span class="monsterspan"> 
-<button class="closeThis">X</button>
+<button class="closeThis" onclick="event.preventDefault();
+this.parentElement.remove();">X</button>
 <img src="${linkerNew}">
 <input type="text" name="name[]" placeholder="title">
 <textarea  name="description[]" value="description" placeholder="description" style="width:100%;height:60px;box-sizing:border-box;padding:5px;">
@@ -72,7 +70,8 @@
 
        window.opener.document.querySelector('.imagelist').insertAdjacentHTML('afterbegin', `
 <span class="monsterspan"> 
-<button class="closeThis">X</button>
+<button class="closeThis" onclick="event.preventDefault();
+this.parentElement.remove();">X</button>
 <img src="${linkerNew}">
 <input type="text" name="name[]" placeholder="title">
 <textarea  name="description[]" value="description" placeholder="description" style="width:100%;height:60px;box-sizing:border-box;padding:5px;">
