@@ -3,7 +3,7 @@
 global $SITEURL;
 
 $gal = '
-<script src="' . HTML_PATH_ROOT . '/bl-plugins/monsterGallery/modules/spotlight/spotlight.bundle.js"></script>
+<script src="' . DOMAIN_BASE . 'bl-plugins/monsterGallery/modules/spotlight/spotlight.bundle.js"></script>
 <style>
 
 .monsterGallery-grid{

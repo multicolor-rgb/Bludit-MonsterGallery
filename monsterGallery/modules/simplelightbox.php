@@ -3,7 +3,7 @@
 global $SITEURL;
 
 $gal = '
-<link rel="stylesheet" href="' . HTML_PATH_ROOT . 'bl-plugins/monsterGallery/modules/simplelightbox/simple-lightbox.min.css">
+<link rel="stylesheet" href="' . DOMAIN_BASE . 'bl-plugins/monsterGallery/modules/simplelightbox/simple-lightbox.min.css">
 
 <style>
 
@@ -55,7 +55,7 @@ $gal .= '</div>';
 
 
 $gal .= '
-<script src="' . HTML_PATH_ROOT . 'bl-plugins/monsterGallery/modules/simplelightbox/simple-lightbox.min.js"></script>
+<script src="' . DOMAIN_BASE. 'bl-plugins/monsterGallery/modules/simplelightbox/simple-lightbox.min.js"></script>
 
 
  <script>

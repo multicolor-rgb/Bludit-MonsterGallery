@@ -4,7 +4,7 @@ global $SITEURL;
 
 $gal = '
 
-<link rel="stylesheet" href="'.HTML_PATH_ROOT.'/bl-plugins/monsterGallery/modules/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="'.DOMAIN_BASE.'bl-plugins/monsterGallery/modules/photoswipe/photoswipe.css">
 
 <style>
 
@@ -56,7 +56,7 @@ alt="'.$dataJson->names[$key].' '.$dataJson->descriptions[$key].'"
 
  $gal .= '</div>';
 
- $gal .= '<script type="module" src="'.HTML_PATH_ROOT.'/bl-plugins/monsterGallery/modules/photoswipe/photoSwipeModule.js"></script>';
+ $gal .= '<script type="module" src="'.DOMAIN_BASE.'bl-plugins/monsterGallery/modules/photoswipe/photoSwipeModule.js"></script>';
 
 
 

@@ -3,7 +3,7 @@
 global $SITEURL;
 
 $gal = '
-<link rel="stylesheet" href="'.HTML_PATH_ROOT.'/bl-plugins/monsterGallery/modules/baguettebox/baguetteBox.min.css">
+<link rel="stylesheet" href="'.DOMAIN_BASE.'/bl-plugins/monsterGallery/modules/baguettebox/baguetteBox.min.css">
 <style>
 
 .monsterGallery-grid{
@@ -54,7 +54,7 @@ $gal .=  '<a href="'.$value.'"      data-caption="<h4>'.$dataJson->names[$key].'
  $gal .= '</div>';
 
 
-$gal .= '<script async  src="'.HTML_PATH_ROOT.'/bl-plugins/monsterGallery/modules/baguettebox/baguetteBox.min.js"></script>';
+$gal .= '<script async  src="'.DOMAIN_BASE.'/bl-plugins/monsterGallery/modules/baguettebox/baguetteBox.min.js"></script>';
 
 $gal .= '<script>
  

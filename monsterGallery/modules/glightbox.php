@@ -3,7 +3,7 @@
 
 
 $gal = '
-<link rel="stylesheet" href="' . HTML_PATH_ROOT . '/bl-plugins/monsterGallery/modules/glightbox/glightbox.min.css">
+<link rel="stylesheet" href="' .DOMAIN_BASE . 'bl-plugins/monsterGallery/modules/glightbox/glightbox.min.css">
 <style>
 
 .monsterGallery-grid{
@@ -52,8 +52,8 @@ $gal .= '</div>';
 
 
 
-$gal .= '<script src="' . HTML_PATH_ROOT . '/bl-plugins/monsterGallery/modules/glightbox/glightbox.min.js"></script>
- <script src="' . HTML_PATH_ROOT . '/bl-plugins/monsterGallery/modules/glightbox/glightboxrun.js"></script>';
+$gal .= '<script src="' . DOMAIN_BASE . '/bl-plugins/monsterGallery/modules/glightbox/glightbox.min.js"></script>
+ <script src="' . DOMAIN_BASE . '/bl-plugins/monsterGallery/modules/glightbox/glightboxrun.js"></script>';
 
 
 
