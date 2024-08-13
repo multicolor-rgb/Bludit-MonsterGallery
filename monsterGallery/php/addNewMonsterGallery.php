@@ -131,10 +131,15 @@ display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;box-sizing: border-b
  	</div>
 
 
+<div class="mt-2">
+	
+<button class="addMG btn btn-primary">Add Image</button>
 
- 	<button class="addMG" style="background: #000;color:#fff;padding:0.5rem 1rem;border:none;margin-top:10px;">Add Image</button>
+	
+<input type="submit" name="saveMG" class="saveMG btn btn-danger" value="save gallery" >
+</div>
 
- 	<br>
+
 
  	<div class="imagelist" id="imagelist" style=" padding:10px;margin:10px 0;">
 
@@ -176,7 +181,7 @@ this.parentElement.remove();">X</button>
 
  	</div>
 
- 	<input type="submit" name="saveMG" class="saveMG" value="save gallery" style="background: #000;color:#fff;padding:0.5rem 1rem;border:none">
+ 	<input type="submit" name="saveMG" class="saveMG btn btn-primary" value="save gallery"  >
 
 
 

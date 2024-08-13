@@ -10,29 +10,71 @@
 
    .col-lg-10 {
      all: unset;
-     width: 100% !important;
+     width: 95% !important;
    }
  </style>
 
+
+<select class="col-md-12 form-control m-2" onchange="changeFolder(this)">
+   <option value="root">Root</option>
+   <?php
+    $count = 0;
+    if (isset($_GET['folder'])) {
+      if ($_GET['folder'] == 'root') {
+        $storeFolderImages =  $storeFolderImages;
+        $HTMLstoreFolderImages =  $HTMLstoreFolderImages;
+      }
+      $storeFolderImages = $storeFolderImages . $_GET['folder'] . '/';
+      $HTMLstoreFolderImages = $HTMLstoreFolderImages . $_GET['folder'] . '/';
+    }
+
+    foreach (glob($storeFolder . 'monsterGalleryImages/' . '*', GLOB_ONLYDIR) as $folder) {
+      if (is_dir($folder)) {
+        $folderName = basename($folder);
+        echo '<option value="' . $folderName . '" style="width:100%;padding:10px;">' . $folderName . '</option>';
+        $count++;
+      }
+    }
+    ?>
+ </select>
+
+ <div class="col-md-12 d-flex justify-content-between align-items-center bg-light border p-2 m-0 ml-2">
+<h4 class="m-0"><?php echo @$_GET['folder'];?></h4> <button class="addall  btn btn-primary">Add All</button>
+
+
+  </div>
  <?php
 
   $count = 0;
   foreach (glob($storeFolderImages . '*') as $img) {
 
-    $base = pathinfo($img)['basename'];
+    if (is_file($img)) {
+      $base = pathinfo($img)['basename'];
 
-    echo '<a href="' . $base . '" class="photo" onclick="event.preventDefault();submitLink(' . $count . ')"><img src="' . $base . '" style="width:100px;height:100px;object-fit:cover;margin:10px;"></a>';
-    $count++;
+      echo '<a href="' . $base . '" class="photo" onclick="event.preventDefault();submitLink(' . $count . ')"><img src="' . $base . '" style="width:100px;height:100px;object-fit:cover;margin:10px;"></a>';
+      $count++;
+    };
   }; ?>
 
+
+
+ 
 
  <script>
    document.querySelectorAll('.photo').forEach(x => {
 
-     x.setAttribute('href', window.location.origin +  '<?php echo $HTMLstoreFolderImages ;?>' + x.getAttribute('href'))
-     x.querySelector('img').setAttribute('src', window.location.origin +  '<?php echo $HTMLstoreFolderImages ;?>' + x.querySelector('img').getAttribute('src'));
+     x.setAttribute('href', window.location.origin + '<?php echo $HTMLstoreFolderImages; ?>' + x.getAttribute('href'))
+     x.querySelector('img').setAttribute('src', window.location.origin + '<?php echo $HTMLstoreFolderImages; ?>' + x.querySelector('img').getAttribute('src'));
 
    })
+
+
+
+   function changeFolder(select) {
+     const folderName = select.value;
+     window.location.href = DOMAIN_ADMIN + `plugin/monstergallery?&filebrowser&folder=${folderName}`;
+};
+
 
 
    function submitLink(e) {
@@ -64,7 +106,7 @@ this.parentElement.remove();">X</button>
    document.querySelector('.addall').addEventListener('click', () => {
 
      document.querySelectorAll('.photo').forEach(x => {
-       let linker = x.getAttribute('src');
+       let linker = x.getAttribute('href');
        console.log(linker);
        let linkerNew = linker;
 

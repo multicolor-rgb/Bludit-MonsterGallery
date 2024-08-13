@@ -11,16 +11,7 @@
 		align-items: center;
 	}
 
-	.galitem a {
-		background: #000;
-		color: #fff !important;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: #fff;
-		padding: 0.5rem 1rem;
-		text-decoration: none !important;
-	}
+
 
 	.galitem p {
 		margin: 0 !important;
@@ -31,17 +22,17 @@
 <h3>MonsterGallery list</h3>
 <br>
 
-<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&uploader" style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none;">UPLOAD IMAGES</a>
+<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&uploader"  class="btn btn-primary">UPLOAD IMAGES</a>
 
 
-<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&addMonsterGallery" style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none;">ADD</a>
+<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&addMonsterGallery"  class="btn btn-primary">ADD</a>
 
-<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&monsterGalleryList&clearCache" style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none;background: red;">CLEAR THUMBNAILS CACHE</a>
+<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&monsterGalleryList&clearCache"  class="btn btn-danger">CLEAR THUMBNAILS CACHE</a>
 
-<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&migrateGallery" style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none">MIGRATE</a>
-<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&moveData&monsterGalleryList=true" style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none">MOVE DATA FROM OLDERVERSION</a>
+<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&migrateGallery"  class="btn btn-primary">MIGRATE</a>
+<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&moveData&monsterGalleryList=true"  class="btn btn-primary">MOVE DATA FROM OLDERVERSION</a>
 
-<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&credits" style="padding:0.5rem 1rem;background: #000;color:#fff;text-decoration: none;">CREDITS</a>
+<a href="<?php echo DOMAIN_ADMIN; ?>plugin/monstergallery?&credits"  class="btn btn-primary">CREDITS</a>
 
 
 
@@ -69,10 +60,10 @@
 
 
 <div style="display:flex;gap:10px;">
-<a href="' . HTML_PATH_ADMIN_ROOT . 'plugin/monstergallery?&addMonsterGallery&edit=' . $name . '">
+<a class="btn btn-primary" href="' . HTML_PATH_ADMIN_ROOT . 'plugin/monstergallery?&addMonsterGallery&edit=' . $name . '">
 Edit
 </a>
-<a  style="background:red;" href="' . HTML_PATH_ADMIN_ROOT . 'plugin/monstergallery?monsterGalleryList=true&delete=' . $name . '">
+<a   class="btn btn-danger" href="' . HTML_PATH_ADMIN_ROOT . 'plugin/monstergallery?monsterGalleryList=true&delete=' . $name . '">
 Delete
 </a>
 </div>

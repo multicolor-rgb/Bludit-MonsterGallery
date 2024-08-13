@@ -113,11 +113,23 @@ class monsterGallery extends Plugin
             $folder = $storeFolderThumb;
 
 
+
+
             $extension =  pathinfo($values, PATHINFO_EXTENSION);
 
-            $base = pathinfo($values, PATHINFO_BASENAME);
+            $base = pathinfo($values, PATHINFO_FILENAME);
 
-            $finalfile = $folder . $width . "-" . $base;
+            $parentFolder = basename(dirname($values));
+
+            if ($parentFolder == 'monsterGalleryImages') {
+                $parentFolder = 'root';
+            };
+
+
+
+
+
+            $finalfile = $folder . $parentFolder . '-' . $width  . "-" .  $base . '.' . $extension;
 
             if (file_exists($finalfile)) {
             } else {
@@ -238,6 +250,7 @@ class monsterGallery extends Plugin
 
 
 
+
         $ds   = DIRECTORY_SEPARATOR;
 
 
@@ -273,19 +286,39 @@ class monsterGallery extends Plugin
         file_put_contents($storeFolderThumb . '.htaccess', 'Allow from all');
         file_put_contents($storeFolderList . '.htaccess', 'Deny from all');
 
-
         if (!empty($_FILES)) {
 
-            $tempFile = $_FILES['file']['tmp_name'];
-            $targetPath =  $storeFolderImages;
+            if (empty($_POST['folder'])) {
 
-            $names = $_FILES['file']['name'];
-            $noSpaceName = str_replace(' ', '-', pathinfo($_FILES['file']['name'])['filename']);
-            $newName = preg_replace('/[^0-9a-z\-]+/', '', $noSpaceName);
+                $targetPath =   $storeFolderImages;
+            } else {
+                $folderName = preg_replace('/[^0-9a-z\-]+/', '', str_replace(' ', '-', $_POST['folder']));
+                $targetPath =   $storeFolderImages  . $folderName . '/';
+            };
 
-            $targetFile =  $targetPath . $newName . '.' . pathinfo($_FILES['file']['name'])['extension'];
-            move_uploaded_file($tempFile, $targetFile);
-        };
+
+            if (!file_exists($targetPath)) {
+                mkdir($targetPath, 0755);
+                file_put_contents($targetPath . '.htaccess', 'Allow from all');
+            }
+
+            foreach ($_FILES['file']['tmp_name'] as $key => $tempFile) {
+                $names = $_FILES['file']['name'][$key];
+
+                // Usuwanie spacji i niechcianych znaków z nazwy pliku
+                $noSpaceName = str_replace(' ', '-', pathinfo($names, PATHINFO_FILENAME));
+                $noSpaceName = strtolower($noSpaceName);
+                $newName = preg_replace('/[^0-9a-zA-Z\-]+/', '', $noSpaceName);
+
+                // Docelowa ścieżka pliku
+                $targetFile = $targetPath . $newName . '.' . pathinfo($names, PATHINFO_EXTENSION);
+
+                // Przesunięcie pliku z tymczasowej lokalizacji do docelowej
+                move_uploaded_file($tempFile, $targetFile);
+            }
+
+            Alert::set('ALL FILES UPLOADED', ALERT_STATUS_OK);
+        }
 
 
 
